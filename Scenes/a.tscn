@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dlkrcc1k23fqh"]
+
+[sub_resource type="GDScript" id="GDScript_3037s"]
+script/source = "extends CanvasLayer
+
+@onready var fade_rect: ColorRect = $FadeRect
+
+func _ready():
+	fade_rect.modulate.a = 1.0
+	fade_rect.visible = true
+	await fade_in()
+	get_tree().scene_changed.connect(_on_scene_changed)
+func fade_to_black(duration := 0.5):
+	var tween := create_tween()
+	tween.set_ignore_time_scale(true)
+	tween.tween_property(
+		fade_rect,
+		\"modulate:a\",
+		1.0,
+		duration
+	)
+	await tween.finished
+	
+func fade_in(duration := 0.5):
+	var tween:= create_tween()
+	tween.set_ignore_time_scale(true)
+	tween.tween_property(
+		fade_rect,
+		\"modulate:a\",
+		0.0,
+		duration
+	)
+	await tween.finished
+
+func _on_scene_changed():
+	await get_tree().process_frame
+	await fade_in()
+"
+
+[node name="FadeManager" type="CanvasLayer" unique_id=1834867315]
+script = SubResource("GDScript_3037s")
+
+[node name="FadeRect" type="ColorRect" parent="." unique_id=1431015193]
+modulate = Color(0, 0, 0, 1)
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="1st try compat"
-run/main_scene="uid://ccq73fxqtrxgw"
+run/main_scene="uid://v8y51bcds8w2"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [audio]
@@ -21,6 +21,11 @@ buses/default_bus_layout="uid://bau5u2grequcf"
 [autoload]
 
 Music="*uid://bwisfn1jevyi0"
+A="*uid://dlkrcc1k23fqh"
+
+[global_group]
+
+player=""
 
 [input]
 

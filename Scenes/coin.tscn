@@ -10,9 +10,10 @@ script/source = "extends Area2D
 @onready var animation_player:= $AnimationPlayer
 
 
-func _on_body_entered(body: Node2D) -> void:
-	game_manager.addPoint()
-	animation_player.play(\"pickup\")
+func _on_body_entered(body) -> void:
+	if body.name == \"Player\":
+		$\"../../CoinCanvas/Control/HBoxContainer/CoinsLabelUI\".addPoint()
+		animation_player.play(\"pickup\")
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wowpa"]
